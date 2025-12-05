@@ -4,16 +4,60 @@
   <meta charset="UTF-8">
   <title>Random User Generator</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; text-align: center; }
-    #user { margin-top: 2rem; }
-    img { border-radius: 50%; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    #users {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .user-card {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: 200px;
+      text-align: center;
+    }
+    .user-card img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+    button {
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+    }
+    #favorites {
+      margin-top: 3rem;
+    }
+    #favorites h2 {
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
   <h1>Random User Generator</h1>
-  <button id="getUserBtn">Get Random User</button>
+  <button id="getUserBtn">Get 3 Random Users</button>
 
-  <div id="user"></div>
+  <div id="users"></div>
+
+  <div id="favorites">
+    <h2>Favorites</h2>
+    <div id="favoriteUsers"></div>
+  </div>
 
   <script src="app.js"></script>
 </body>
