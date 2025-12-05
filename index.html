@@ -2,61 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random User Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random User Generator App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      text-align: center;
-      background-color: #f4f4f4;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+      color: #333;
     }
-    #users {
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #3b82f6;
+      color: white;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 600;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .controls {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .controls input {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      min-width: 200px;
+    }
+    .controls button {
+      padding: 0.5rem 1.5rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .controls button:hover {
+      background-color: #2563eb;
+    }
+    #users, #favoriteUsers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.5rem;
-      margin-top: 2rem;
     }
     .user-card {
-      background-color: #fff;
+      background-color: white;
+      border-radius: 12px;
       padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      width: 200px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
       text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .user-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
     .user-card img {
       border-radius: 50%;
       width: 100px;
       height: 100px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
     }
-    button {
-      padding: 0.4rem 0.8rem;
-      margin-top: 0.5rem;
-      cursor: pointer;
+    .user-card h2 {
+      font-size: 1rem;
+      margin: 0.3rem 0;
+      font-weight: 600;
+    }
+    .user-card p {
       font-size: 0.9rem;
+      margin: 0.2rem 0;
+      color: #555;
     }
-    h2 {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
+    .user-card button {
+      margin-top: 0.5rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+    .user-card button.add {
+      background-color: #10b981;
+      color: white;
+    }
+    .user-card button.add:hover {
+      background-color: #059669;
+    }
+    .user-card button.remove {
+      background-color: #ef4444;
+      color: white;
+    }
+    .user-card button.remove:hover {
+      background-color: #b91c1c;
+    }
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #111827;
     }
     #favorites {
       margin-top: 3rem;
     }
-    #favorites h2 {
-      font-size: 1.2rem;
+    @media (max-width: 500px) {
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+      .controls input {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Random User Generator</h1>
-  <button id="getUserBtn">Get 3 Random Users</button>
+  <header>
+    <h1>Random User Generator App</h1>
+  </header>
+  <div class="container">
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="Search by name or country">
+      <button id="getUserBtn">Get 3 Random Users</button>
+    </div>
 
-  <div id="users"></div>
+    <h2 class="section-title">Users</h2>
+    <div id="users"></div>
 
-  <div id="favorites">
-    <h2>Favorites</h2>
-    <div id="favoriteUsers"></div>
+    <div id="favorites">
+      <h2 class="section-title">Favorites</h2>
+      <div id="favoriteUsers"></div>
+    </div>
   </div>
 
   <script src="app.js"></script>
