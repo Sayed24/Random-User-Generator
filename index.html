@@ -1,154 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random User Generator App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random User App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
+    :root {
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --sub-text: #4b5563;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    body.dark {
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --text: #f9fafb;
+      --sub-text: #d1d5db;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #34d399;
+      --danger: #f87171;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
-      color: #333;
+      background: var(--bg);
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
     }
+
     header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background-color: #3b82f6;
+      background: var(--accent);
       color: white;
+      padding: 1.5rem;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     header h1 {
       margin: 0;
+      font-size: 1.4rem;
       font-weight: 600;
     }
+
+    #themeToggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    #themeToggle svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
+    }
+
     .container {
       max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      margin: auto;
+      padding: 1.5rem;
     }
+
     .controls {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       gap: 1rem;
-      margin-bottom: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
+
     .controls input {
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 0.7rem 1rem;
       font-size: 1rem;
-      min-width: 200px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      width: 230px;
+      background: var(--card-bg);
+      color: var(--text);
     }
+
     .controls button {
-      padding: 0.5rem 1.5rem;
-      background-color: #3b82f6;
-      color: white;
+      padding: 0.7rem 1.4rem;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
+      background: var(--accent);
+      color: white;
       cursor: pointer;
       transition: 0.3s;
     }
+
     .controls button:hover {
-      background-color: #2563eb;
+      background: var(--accent-hover);
     }
-    #users, #favoriteUsers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-    .user-card {
-      background-color: white;
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .user-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-    .user-card img {
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      margin-bottom: 0.5rem;
-    }
-    .user-card h2 {
-      font-size: 1rem;
-      margin: 0.3rem 0;
-      font-weight: 600;
-    }
-    .user-card p {
-      font-size: 0.9rem;
-      margin: 0.2rem 0;
-      color: #555;
-    }
-    .user-card button {
-      margin-top: 0.5rem;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: 0.3s;
-    }
-    .user-card button.add {
-      background-color: #10b981;
-      color: white;
-    }
-    .user-card button.add:hover {
-      background-color: #059669;
-    }
-    .user-card button.remove {
-      background-color: #ef4444;
-      color: white;
-    }
-    .user-card button.remove:hover {
-      background-color: #b91c1c;
-    }
+
     h2.section-title {
       text-align: center;
+      font-size: 1.3rem;
+      margin-top: 2rem;
       margin-bottom: 1rem;
       font-weight: 600;
-      color: #111827;
     }
-    #favorites {
-      margin-top: 3rem;
+
+    #users,
+    #favoriteUsers {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     }
-    @media (max-width: 500px) {
-      .controls {
-        flex-direction: column;
-        align-items: center;
+
+    .user-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
       }
-      .controls input {
-        width: 100%;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
+
+    .user-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .user-card img {
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+    }
+
+    .user-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .user-card p {
+      font-size: 0.9rem;
+      color: var(--sub-text);
+      margin: 0.2rem 0;
+    }
+
+    .user-card button {
+      margin-top: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: 0.3s;
+      color: white;
+    }
+
+    .add {
+      background: var(--success);
+    }
+
+    .add:hover {
+      background: #059669;
+    }
+
+    .remove {
+      background: var(--danger);
+    }
+
+    .remove:hover {
+      background: #b91c1c;
     }
   </style>
 </head>
+
 <body>
   <header>
     <h1>Random User Generator App</h1>
+    <button id="themeToggle">
+      <svg id="themeIcon" viewBox="0 0 24 24">
+        <path d="M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 15a1 1 0 0 1 1 1v1a1 
+        1 0 1 1-2 0v-1a1 1 0 0 1 1-1zm9-6a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 
+        0 0 1 1 1zM5 12a1 1 0 0 1-1 1H3a1 1 0 
+        1 1 0-2h1a1 1 0 0 1 1 1zm12.07 6.07a1 1 0 
+        0 1 1.41 1.41l-.7.7a1 1 0 1 1-1.41-1.41l.7-.7zM6.22 
+        6.22a1 1 0 1 1 1.41-1.41l.7.7A1 1 0 1 1 6.93 
+        6.93l-.7-.7zm12.56 0-.7-.7a1 1 0 1 1 
+        1.41-1.41l.7.7a1 1 0 1 1-1.41 1.41zM6.22 
+        17.78l-.7.7a1 1 0 1 1-1.41-1.41l.7-.7a1 1 0 
+        1 1 1.41 1.41zM12 7a5 5 0 1 1 0 10 5 5 0 
+        0 1 0-10z" />
+      </svg>
+    </button>
   </header>
+
   <div class="container">
     <div class="controls">
-      <input type="text" id="searchInput" placeholder="Search by name or country">
-      <button id="getUserBtn">Get 3 Random Users</button>
+      <input type="text" id="searchInput" placeholder="Search name or country..." />
+      <button id="getUserBtn">Get 3 Users</button>
     </div>
 
     <h2 class="section-title">Users</h2>
     <div id="users"></div>
 
-    <div id="favorites">
-      <h2 class="section-title">Favorites</h2>
-      <div id="favoriteUsers"></div>
-    </div>
+    <h2 class="section-title">Favorites</h2>
+    <div id="favoriteUsers"></div>
   </div>
 
   <script src="app.js"></script>
